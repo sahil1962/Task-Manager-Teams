@@ -4,7 +4,10 @@ export const msalConfig = {
   auth: {
     clientId: process.env.REACT_APP_CLIENT_ID!,
     authority: `https://login.microsoftonline.com/${process.env.REACT_APP_TENANT_ID}`,
-    redirectUri: window.location.origin,
+    redirectUri: process.env.PUBLIC_URL || window.location.origin,
+    postLogoutRedirectUri: process.env.PUBLIC_URL ? 
+      `${process.env.PUBLIC_URL}/login` : 
+      `${window.location.origin}/login`,
     navigateToLoginRequestUrl: false
   },
   cache: {
@@ -12,6 +15,7 @@ export const msalConfig = {
     storeAuthStateInCookie: false,
   }
 };
+
 
 export const graphScopes = [
   "User.Read",
