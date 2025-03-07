@@ -1,13 +1,12 @@
 import { useMsal } from "@azure/msal-react";
+import { loginRequest } from "../auth/authConfig";
 
 export default function LoginPage() {
   const { instance } = useMsal();
 
   const handleLogin = () => {
-    instance.loginRedirect({
-      scopes: ["User.Read", "Tasks.ReadWrite", "Group.ReadWrite.All"],
-      redirectUri: "http://localhost:3000"
-    }).catch((error : any) => console.error("Login failed:", error));
+    instance.loginRedirect(loginRequest)
+      .catch((error: any) => console.error("Login failed:", error));
   };
 
   return (
