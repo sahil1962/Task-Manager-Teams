@@ -1,13 +1,13 @@
-// components/LogoutButton.tsx
 import { useMsal } from "@azure/msal-react";
 import { Button } from "@mui/material";
+import { msalConfig } from "../authConfig";
 
 export default function LogoutButton() {
   const { instance } = useMsal();
 
   const handleLogout = () => {
     instance.logoutRedirect({
-      postLogoutRedirectUri: "http://localhost:3000/login"
+      postLogoutRedirectUri: msalConfig.auth.postLogoutRedirectUri
     });
   };
 
