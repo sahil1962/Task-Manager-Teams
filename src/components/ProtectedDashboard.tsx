@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useMsal } from "@azure/msal-react";
 import { Client } from "@microsoft/microsoft-graph-client";
 import { Link, useNavigate } from "react-router-dom";
-import { getCompletionRate, getTasks } from "../services/plannerService";
+import { getTasks } from "../services/plannerService";
 import { graphScopes } from "../auth/authConfig";
 import LogoutButton from "./LogoutButton";
 
