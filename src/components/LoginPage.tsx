@@ -11,7 +11,7 @@ export default function LoginPage() {
 
   return (
     <div className="login-container">
-      <h1>Task Manager</h1>
+      <h1>Task Manager Apps</h1>
       <button onClick={handleLogin}>
         Sign In with Microsoft
       </button>
