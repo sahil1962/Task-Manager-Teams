@@ -1,6 +1,6 @@
 import { useMsal } from "@azure/msal-react";
 import { Button } from "@mui/material";
-import { msalConfig } from "../authConfig";
+import { msalConfig } from "../auth/authConfig";
 
 export default function LogoutButton() {
   const { instance } = useMsal();
