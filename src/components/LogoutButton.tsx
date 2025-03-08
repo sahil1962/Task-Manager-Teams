@@ -4,18 +4,13 @@ import { msalConfig } from "../auth/authConfig";
 
 export default function LogoutButton() {
   const { instance } = useMsal();
-
-  const handleLogout = () => {
-    instance.logoutRedirect({
-      postLogoutRedirectUri: msalConfig.auth.postLogoutRedirectUri
-    });
-  };
-
   return (
     <Button 
       variant="contained" 
       color="error"
-      onClick={handleLogout}
+      // onClick={handleLogout}
+      onClick={() => instance.logoutPopup()}
+        className="logout-button"
     >
       Logout
     </Button>

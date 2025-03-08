@@ -4,7 +4,7 @@ import { Client } from "@microsoft/microsoft-graph-client";
 import { Link, useNavigate } from "react-router-dom";
 import { getTasks } from "../services/plannerService";
 import { graphScopes } from "../auth/authConfig";
-import LogoutButton from "./LogoutButton";
+import NavBar from "./NavBar";
 
 interface DashboardProps {
   planId: string;
@@ -197,13 +197,7 @@ export default function ProtectedDashboard({ planId }: DashboardProps) {
 
   return (
     <div className="dashboard">
-      <nav className="navbar">
-        <div className="nav-links">
-          <Link to="/plans">Plans</Link>
-          <Link to="/create-task">Create Task</Link>
-        </div>
-        <LogoutButton />
-      </nav>
+      <NavBar/>
       <div className="dashboard-header">
         <h1>Task Management Dashboard</h1>
       </div>
