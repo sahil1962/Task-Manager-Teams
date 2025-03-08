@@ -59,14 +59,14 @@ function App() {
       <Route path="/" element={<AuthenticationHandler />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/dashboard" element={<ProtectedDashboard planId={selectedPlan} />} />
-      {/* <Route path="/plans" element={<PlanSelection plans={plans} onSelectPlan={setSelectedPlan} />} /> */}
-      <Route 
+      <Route path="/plans" element={<PlanSelection plans={plans} onSelectPlan={setSelectedPlan} />} />
+      {/* <Route 
         path="/plans" 
         element={plansLoading ? 
           <div className="loading">Loading plans...</div> : 
           <PlanSelection plans={plans} onSelectPlan={setSelectedPlan} />
         } 
-      />
+      /> */}
       <Route path="/*" element={<AuthenticationHandler />} />
       <Route path="/create-task" element={<TaskCreator planId={selectedPlan} />} />
     </Routes>
