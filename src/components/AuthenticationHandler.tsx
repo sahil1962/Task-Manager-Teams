@@ -1,3 +1,4 @@
+// src/components/AuthenticationHandler.tsx
 import { useEffect, useState } from "react";
 import { useMsal } from "@azure/msal-react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -11,26 +12,21 @@ export default function AuthenticationHandler() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        // Handle any redirect response
         const response = await instance.handleRedirectPromise();
         
         if (response) {
           instance.setActiveAccount(response.account);
-          // navigate("/plans", { replace: true });
-          window.location.reload();
+          navigate("/plans", { replace: true });
           return;
         }
 
         const account = instance.getActiveAccount();
-        console.log("Auth check - Active account:", account);
         
         if (account) {
-          // Redirect logic for authenticated users
-          if (location.pathname === "/" || location.pathname === "/login") {
+          if (["/", "/login"].includes(location.pathname)) {
             navigate("/plans", { replace: true });
           }
         } else {
-          // Redirect to login for unauthenticated users
           if (location.pathname !== "/login") {
             navigate("/login", { replace: true });
           }
@@ -45,8 +41,7 @@ export default function AuthenticationHandler() {
 
     checkAuth();
   }, [instance, navigate, location.pathname]);
-  console.log("Current path:", location.pathname);
-  console.log("Active account:", instance.getActiveAccount());
+
   if (!checked) return <div className="loading">Checking authentication status...</div>;
 
   return null;

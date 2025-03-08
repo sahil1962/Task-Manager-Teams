@@ -16,17 +16,16 @@ function App() {
   const [plans, setPlans] = useState<any[]>([]);
   const [selectedPlan, setSelectedPlan] = useState("");
   const [initialized, setInitialized] = useState(false);
-  const [plansLoading, setPlansLoading] = useState(true); // Add loading state
+  const [plansLoading, setPlansLoading] = useState(true);
 
   useEffect(() => {
     const initializeApp = async () => {
       try {
-        // Remove duplicate initialization
         await instance.handleRedirectPromise();
         
         const account = instance.getActiveAccount();
         if (account) {
-          setPlansLoading(true); // Start loading
+          setPlansLoading(true);
           const client = Client.init({
             authProvider: async (done) => {
               try {
@@ -36,7 +35,6 @@ function App() {
                 });
                 done(null, token.accessToken);
               } catch (error) {
-                console.error("Token acquisition failed:", error);
                 done(error as Error, null);
               }
             }
@@ -44,10 +42,8 @@ function App() {
           
           const plannerPlans = await getPlans(client);
           setPlans(plannerPlans);
-          setPlansLoading(false); // End loading
+          setPlansLoading(false);
         }
-      } catch (error) {
-        console.error("Initialization failed:", error);
       } finally {
         setInitialized(true);
       }
@@ -57,16 +53,19 @@ function App() {
   }, [instance]);
 
   if (!initialized) return <div className="loading">Initializing application...</div>;
-  console.log("Plans data:", plans);
-  console.log("Selected plan:", selectedPlan);
   
   return (
     <Routes>
       <Route path="/" element={<AuthenticationHandler />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/dashboard" element={<ProtectedDashboard planId={selectedPlan} />} />
-      {/* <Route path="/plans" element={<PlanSelection plans={plans} onSelectPlan={setSelectedPlan} />} /> */}
-      <Route path="/plans" element={plansLoading ? <div className="loading">Loading plans...</div> : <PlanSelection plans={plans} onSelectPlan={setSelectedPlan} />} />
+      <Route 
+        path="/plans" 
+        element={plansLoading ? 
+          <div className="loading">Loading plans...</div> : 
+          <PlanSelection plans={plans} onSelectPlan={setSelectedPlan} />
+        } 
+      />
       <Route path="/*" element={<AuthenticationHandler />} />
       <Route path="/create-task" element={<TaskCreator planId={selectedPlan} />} />
     </Routes>

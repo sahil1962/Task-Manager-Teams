@@ -1,3 +1,4 @@
+// index.tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { MsalProvider } from "@azure/msal-react";
@@ -10,7 +11,6 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-// Simple render without extra initialization
 root.render(
   <React.StrictMode>
     <BrowserRouter>
