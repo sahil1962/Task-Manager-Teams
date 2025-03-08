@@ -36,7 +36,7 @@ export default function ProtectedDashboard({ planId }: DashboardProps) {
   useEffect(() => {
     const checkAuth = () => {
       const accounts = instance.getAllAccounts();
-      if (accounts.length === 0) navigate(`${process.env.PUBLIC_URL}/login`);
+      if (accounts.length === 0) navigate("/login");
     };
     checkAuth();
   }, [instance, navigate]);
@@ -44,12 +44,12 @@ export default function ProtectedDashboard({ planId }: DashboardProps) {
   useEffect(() => {
     const account = instance.getActiveAccount();
     if (!account) {
-      navigate(`${process.env.PUBLIC_URL}/login`);
+      navigate("/login");
       return;
     }
 
     if (!planId) {
-      navigate(`${process.env.PUBLIC_URL}/plans`);
+      navigate("/plans");
       return;
     }
 
