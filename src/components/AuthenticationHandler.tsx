@@ -27,17 +27,17 @@ export default function AuthenticationHandler() {
         if (account) {
           // Redirect logic for authenticated users
           if (location.pathname === "/" || location.pathname === "/login") {
-            navigate("/plans", { replace: true });
+            navigate(`${process.env.PUBLIC_URL}/plans`, { replace: true });
           }
         } else {
           // Redirect to login for unauthenticated users
           if (location.pathname !== "/login") {
-            navigate("/login", { replace: true });
+            navigate(`${process.env.PUBLIC_URL}/login`, { replace: true });
           }
         }
       } catch (error) {
         console.error("Authentication error:", error);
-        navigate("/login", { replace: true });
+        navigate(`${process.env.PUBLIC_URL}/login`, { replace: true });
       } finally {
         setChecked(true);
       }

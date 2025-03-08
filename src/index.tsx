@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
 // Simple render without extra initialization
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <MsalProvider instance={msalInstance}>
         <App />
       </MsalProvider>

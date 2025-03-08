@@ -42,9 +42,9 @@ export const getPlans = async (client: Client) => {
     cachedPlans = [...personalPlans, ...groupPlans.flat()]
     .filter((v, i, a) => a.findIndex(t => t.id === v.id) === i);
     return cachedPlans;
-    // Combine and deduplicate
-    return [...personalPlans, ...groupPlans.flat()]
-      .filter((v, i, a) => a.findIndex(t => t.id === v.id) === i);
+    // // Combine and deduplicate
+    // return [...personalPlans, ...groupPlans.flat()]
+    //   .filter((v, i, a) => a.findIndex(t => t.id === v.id) === i);
   } catch (error) {
     console.error("Error fetching plans:", error);
     return [];
