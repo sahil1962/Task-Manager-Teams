@@ -4,6 +4,8 @@ services:
     env: node
     buildCommand: npm install && npm run build
     startCommand: serve -s build -l $PORT --single
-    envVars:
-      - key: PUBLIC_URL
-        value: "/"
+    staticSite: true
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

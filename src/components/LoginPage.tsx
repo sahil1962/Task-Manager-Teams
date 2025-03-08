@@ -6,9 +6,10 @@ export default function LoginPage() {
 
   const handleLogin = () => {
     instance.loginRedirect(loginRequest)
-      .catch((error: any) => console.error("Login failed:", error));
+      .then(() => window.location.reload())
+      .catch(console.error);
   };
-
+  
   return (
     <div className="login-container">
       <h1>Task Manager Apps</h1>
