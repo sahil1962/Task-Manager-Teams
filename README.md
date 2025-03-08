@@ -1,46 +1,151 @@
-# Getting Started with Create React App
+markdown
+Copy
+# Task Manager for Microsoft Teams
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern web application for managers to assign and track weekly tasks using Microsoft Planner as backend via Microsoft Graph API.
 
-## Available Scripts
+![Dashboard Preview](screenshots/dashboard.png)
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- 🔐 Microsoft OAuth2 Authentication
+- 📅 Recurring weekly task creation
+- 📊 Interactive progress dashboard
+- 👥 Team member assignment tracking
+- 🎨 Modern UI with animations
+- 🔄 Real-time sync with Microsoft Planner
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Prerequisites
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Node.js v18+
+- Microsoft 365 Organizational Account
+- Azure Portal Subscription
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1. Azure Application Registration
 
-### `npm run build`
+1. Go to [Azure Portal](https://portal.azure.com)
+2. Navigate to **Azure Active Directory** > **App Registrations** > **New Registration**
+   - Name: `Task Manager`
+   - Supported Account Types: **Accounts in this organizational directory only**
+   - Redirect URI: `http://localhost:3000` (development)
+3. After creation, note:
+   - **Application (client) ID**
+   - **Directory (tenant) ID**
+4. Under **API Permissions**, add:
+   - `Tasks.ReadWrite`
+   - `Group.ReadWrite.All` 
+   - `User.Read`
+5. **Grant Admin Consent** for your organization
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. Local Setup
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+# Clone repository
+git clone https://github.com/yourusername/task-manager.git
+cd task-manager
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Install dependencies
+npm install
 
-### `npm run eject`
+# Create environment file
+echo "REACT_APP_CLIENT_ID=your_client_id
+REACT_APP_TENANT_ID=your_tenant_id
+PUBLIC_URL=http://localhost:3000" > .env
+3. Running the Application
+bash
+Copy
+# Development mode
+npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Production build
+npm run build && npm run serve
+Deployment
+Create new Web Service on Render.com
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Environment Variables:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+REACT_APP_CLIENT_ID = Your Azure Client ID
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+REACT_APP_TENANT_ID = Your Azure Tenant ID
 
-## Learn More
+PUBLIC_URL = Your Render URL
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Build Command: npm install && npm run build
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Start Command: serve -s build -l $PORT --single
+
+Application Structure
+Copy
+task-manager/
+├── src/
+│   ├── components/      # React components
+│   ├── services/        # Microsoft Graph services
+│   ├── auth/            # Authentication configuration
+│   └── styles.css       # Main styling
+├── public/              # Static assets
+└── .env                 # Environment configuration
+Usage Guide
+Login
+Click "Sign In with Microsoft" using your organizational account
+
+Select Plan
+Choose an existing Microsoft Planner plan from your Teams
+
+Dashboard
+
+View completion progress
+
+Track ongoing tasks
+
+Manage assignments
+
+Create Tasks
+
+Set weekly recurrence
+
+Assign to team members
+
+Add priority labels
+
+Troubleshooting
+Common Issues:
+
+🔄 Page Refresh Errors
+Ensure Render.com has proper rewrite rules in render.yaml
+
+🔒 Authentication Failures
+Verify Azure redirect URIs match exactly (including trailing slashes)
+
+📊 Missing Planner Data
+Check user has access to Planner plans in Microsoft Teams
+
+💾 Environment Variables
+Confirm .env file exists with correct Azure credentials
+
+Contributing
+Fork the repository
+
+Create feature branch: git checkout -b feature/new-feature
+
+Commit changes: git commit -m 'Add new feature'
+
+Push to branch: git push origin feature/new-feature
+
+Submit pull request
+
+License
+MIT License - see LICENSE for details
+
+Note: This application requires Microsoft 365 organizational account and Azure AD admin consent for initial setup.
+
+Copy
+
+Include these screenshots in a `/screenshots` directory:
+1. login.png - Login screen
+2. plans.png - Plan selection
+3. dashboard.png - Main dashboard
+4. create-task.png - Task creation form
+
+This README provides complete setup instructions while maintaining security best practices and clear navigation through the application workflow.
