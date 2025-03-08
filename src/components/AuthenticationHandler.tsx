@@ -1,7 +1,10 @@
 // src/components/AuthenticationHandler.tsx
+
 import { useEffect, useState } from "react";
 import { useMsal } from "@azure/msal-react";
 import { useNavigate, useLocation } from "react-router-dom";
+
+const validPaths = ['/', '/login', '/plans', '/dashboard', '/create-task'];
 
 export default function AuthenticationHandler() {
   const { instance } = useMsal();
@@ -12,6 +15,12 @@ export default function AuthenticationHandler() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
+        // Validate path first
+        if (!validPaths.includes(location.pathname)) {
+          navigate('/login', { replace: true });
+          return;
+        }
+
         const response = await instance.handleRedirectPromise();
         
         if (response) {

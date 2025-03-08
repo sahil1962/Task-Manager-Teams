@@ -5,7 +5,3 @@ services:
     buildCommand: npm install && npm run build
     startCommand: serve -s build -l $PORT --single
     staticSite: true
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html

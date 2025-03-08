@@ -59,6 +59,7 @@ function App() {
       <Route path="/" element={<AuthenticationHandler />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/dashboard" element={<ProtectedDashboard planId={selectedPlan} />} />
+      {/* <Route path="/plans" element={<PlanSelection plans={plans} onSelectPlan={setSelectedPlan} />} /> */}
       <Route 
         path="/plans" 
         element={plansLoading ? 
