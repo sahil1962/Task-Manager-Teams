@@ -16,15 +16,17 @@ function App() {
   const [plans, setPlans] = useState<any[]>([]);
   const [selectedPlan, setSelectedPlan] = useState("");
   const [initialized, setInitialized] = useState(false);
+  const [plansLoading, setPlansLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     const initializeApp = async () => {
       try {
-        await instance.initialize();
+        // Remove duplicate initialization
         await instance.handleRedirectPromise();
         
         const account = instance.getActiveAccount();
         if (account) {
+          setPlansLoading(true); // Start loading
           const client = Client.init({
             authProvider: async (done) => {
               try {
@@ -40,11 +42,9 @@ function App() {
             }
           });
           
-          // Add debug logging
-          console.log("Fetching plans...");
           const plannerPlans = await getPlans(client);
-          console.log("Plans received:", plannerPlans);
           setPlans(plannerPlans);
+          setPlansLoading(false); // End loading
         }
       } catch (error) {
         console.error("Initialization failed:", error);
@@ -52,7 +52,7 @@ function App() {
         setInitialized(true);
       }
     };
-  
+
     initializeApp();
   }, [instance]);
 
@@ -66,6 +66,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/dashboard" element={<ProtectedDashboard planId={selectedPlan} />} />
       <Route path="/plans" element={<PlanSelection plans={plans} onSelectPlan={setSelectedPlan} />} />
+      <Route path="/plans" element={plansLoading ? <div className="loading">Loading plans...</div> : <PlanSelection plans={plans} onSelectPlan={setSelectedPlan} />} />
       <Route path="/*" element={<AuthenticationHandler />} />
       <Route path="/create-task" element={<TaskCreator planId={selectedPlan} />} />
     </Routes>

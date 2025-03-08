@@ -15,8 +15,10 @@ async function getAllPages(client: Client, api: any) {
 }
 
 // Updated getPlans function
+let cachedPlans: any[] = [];
 export const getPlans = async (client: Client) => {
   try {
+    if (cachedPlans.length > 0) return cachedPlans;
     // Get personal plans
     const personalPlans = await getAllPages(client, client.api('/me/planner/plans'));
 
@@ -37,7 +39,9 @@ export const getPlans = async (client: Client) => {
         }
       })
     );
-
+    cachedPlans = [...personalPlans, ...groupPlans.flat()]
+    .filter((v, i, a) => a.findIndex(t => t.id === v.id) === i);
+    return cachedPlans;
     // Combine and deduplicate
     return [...personalPlans, ...groupPlans.flat()]
       .filter((v, i, a) => a.findIndex(t => t.id === v.id) === i);

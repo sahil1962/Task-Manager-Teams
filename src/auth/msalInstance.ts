@@ -1,3 +1,5 @@
+// msalInstance
+
 import { PublicClientApplication } from "@azure/msal-browser";
 
 export const msalInstance = new PublicClientApplication({

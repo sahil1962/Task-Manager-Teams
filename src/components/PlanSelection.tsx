@@ -15,10 +15,21 @@ export default function PlanSelection({ plans, onSelectPlan }: PlanSelectionProp
     onSelectPlan(selectedPlan);
     navigate("/dashboard");
   };
+
   
   if (plans.length === 0) {
-    return <div className="loading">No plans found. Create a plan in Microsoft Planner first.</div>;
+    return (
+      <div className="loading">
+        <p>No plans found. Create a plan in Microsoft Planner first.</p>
+        <button onClick={() => window.location.reload()}>
+          Refresh Plans
+        </button>
+      </div>
+    );
   }
+  // if (plans.length === 0) {
+  //   return <div className="loading">No plans found. Create a plan in Microsoft Planner first.</div>;
+  // }
   
   return (
     <div className="plan-selection">

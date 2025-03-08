@@ -16,7 +16,8 @@ export default function AuthenticationHandler() {
         
         if (response) {
           instance.setActiveAccount(response.account);
-          navigate("/plans", { replace: true });
+          // navigate("/plans", { replace: true });
+          window.location.reload();
           return;
         }
 
