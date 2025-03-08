@@ -1,4 +1,4 @@
-// src/components/AuthenticationHandler.tsx
+// src/components/AuthenticationHandler.tsxT
 
 import { useEffect, useState } from "react";
 import { useMsal } from "@azure/msal-react";
@@ -25,7 +25,10 @@ export default function AuthenticationHandler() {
         
         if (response) {
           instance.setActiveAccount(response.account);
-          navigate("/plans", { replace: true });
+          window.location.reload();
+          // navigate("/plans", { replace: true });
+          window.location.reload();
+
           return;
         }
 
